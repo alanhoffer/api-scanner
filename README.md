@@ -16,7 +16,7 @@ ApiScanner es una aplicación móvil desarrollada con Expo y React Native que pe
 1. **Clona el repositorio:**
 
    ```bash
-   git clone https://github.com/tu-usuario/apiscanner.git
+   git clone https://github.com/alanhoffer/api-scanner.git
    ```
 
 2. **Instala las dependencias:**
@@ -81,6 +81,4 @@ Las contribuciones son bienvenidas. Si deseas mejorar este proyecto, sigue los p
 4. Sube los cambios a tu repositorio (`git push origin feature-nueva-funcionalidad`).
 5. Crea un Pull Request.
 
-## Licencia
 
-Este proyecto está licenciado bajo la MIT License. Consulta el archivo [LICENSE](LICENSE) para más detalles.
