@@ -33,6 +33,8 @@ const ListScreen: React.FC = () => {
         }
     };
 
+
+    
     useEffect(() => {
         loadScannedData();
     }, []);

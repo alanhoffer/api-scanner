@@ -1,5 +1,5 @@
 // src/screens/FormScreen.tsx
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from 'expo-router';
@@ -9,10 +9,24 @@ import { useRouteInfo } from 'expo-router/build/hooks';
 
 const FormScreen = () => {
   const route = useRouteInfo();
-  const navigation:any = useNavigation();
+  const navigation: any = useNavigation();
   const { code } = route.params;
   const [tare, setTare] = useState<string>('0');
   const [weight, setWeight] = useState<string>('0');
+
+  useEffect(() => {
+    const fetchTare = async () => {
+      try {
+        const latestTare = await AsyncStorage.getItem('latestTare');
+        if (latestTare)
+          setTare(latestTare);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchTare();
+  }, []);
 
   const handleSave = async () => {
     const newEntry = { id: Date.now().toString(), code, tare: parseFloat(tare), weight: parseFloat(weight) };
@@ -20,6 +34,8 @@ const FormScreen = () => {
     const scannedData = storedData ? JSON.parse(storedData) : [];
     scannedData.push(newEntry);
     await AsyncStorage.setItem('scannedData', JSON.stringify(scannedData));
+    await AsyncStorage.setItem('latestTare', tare);
+
     navigation.navigate('screens/ListScreen');
   };
 
