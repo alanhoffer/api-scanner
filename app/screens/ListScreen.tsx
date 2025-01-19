@@ -55,10 +55,10 @@ const ListScreen: React.FC = () => {
         try {
             await AsyncStorage.setItem('scannedData', JSON.stringify([]));
             setScannedData([]);
-            Alert.alert('Éxito', 'Todos los códigos escaneados han sido borrados.');
+            Alert.alert('Éxito', 'Todos los tambores escaneados han sido borrados.');
             // Navegar de vuelta a la pantalla principal o actualizar el estado
         } catch (error) {
-            Alert.alert('Error', 'No se pudo borrar los códigos escaneados.');
+            Alert.alert('Error', 'No se pudo borrar los tambores escaneados.');
         }
     };
 
@@ -86,7 +86,7 @@ const ListScreen: React.FC = () => {
     const handleRemoveAll = () => {
         Alert.alert(
             'Confirmar Eliminación',
-            '¿Estás seguro de que quieres borrar todos los códigos escaneados?',
+            '¿Estás seguro de que quieres borrar todos los tambores escaneados?',
             [
                 {
                     text: 'Cancelar',
@@ -103,7 +103,7 @@ const ListScreen: React.FC = () => {
     const handleDeleteOne = (item: ScannedDataItem) => {
         Alert.alert(
             'Confirmar Eliminación',
-            `¿Estás seguro de que quieres eliminar el código ${item.code}?`,
+            `¿Estás seguro de que quieres eliminar el tambores ${item.code}?`,
             [
                 {
                     text: 'Eliminar',
@@ -139,7 +139,7 @@ const ListScreen: React.FC = () => {
     const ListFooter = () => (
         scannedData.length > 0 ? (
             <View style={styles.footer}>
-                <Text style={{ minWidth: 150 }}>{scannedData.length} Códigos</Text>
+                <Text style={{ minWidth: 150 }}>{scannedData.length} Tambores</Text>
                 <Text>{totalCalculator('tare')} (kg)</Text>
                 <Text>{totalCalculator('weight')} (kg)</Text>
             </View>
@@ -188,7 +188,7 @@ const ListScreen: React.FC = () => {
                     </View>
                 </TouchableOpacity>
 
-                <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('screens/ScannerScreen')}>
+                <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('screens/CameraScreen')}>
                     <View style={styles.buttonContent}>
                         <Image style={styles.buttonIcon} source={require('../../assets/icons/camera.png')} />
                     </View>

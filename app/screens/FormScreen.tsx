@@ -11,7 +11,9 @@ const FormScreen = () => {
   const route = useRouteInfo();
   const navigation: any = useNavigation();
   const { code } = route.params;
-  const [tare, setTare] = useState<string>('0');
+
+  const [focusedInput, setFocusedInput] = useState<string | null>(null); 
+  const [tare, setTare] = useState<string>('');
   const [weight, setWeight] = useState<string>('0');
 
   useEffect(() => {
@@ -45,22 +47,28 @@ const FormScreen = () => {
         <Text style={styles.title}>Código Escaneado</Text>
         <Text style={styles.code}>{code}</Text>
       </View>
-      <Text style={styles.title}>Tara en kg</Text>
+      <Text style={styles.subTitle}>Tara (kg)</Text>
       <TextInput
-        style={styles.input}
+        style={[styles.input, focusedInput === 'tare' && styles.inputFocused]}
+        onFocus={() => setFocusedInput('tare')}
+        onBlur={() => setFocusedInput(null)}
         placeholder="Tara"
         keyboardType="numeric"
         value={tare}
         onChangeText={setTare}
       />
-      <Text style={styles.title}>Peso en kg</Text>
+      
+      <Text style={styles.subTitle}>Peso (kg)</Text>
       <TextInput
-        style={styles.input}
+        style={[styles.input, focusedInput === 'weight' && styles.inputFocused]}
+        onFocus={() => setFocusedInput('weight')}
+        onBlur={() => setFocusedInput(null)}
         placeholder="Peso"
         keyboardType="numeric"
         value={weight}
         onChangeText={setWeight}
       />
+      
       <TouchableOpacity style={styles.button} onPress={handleSave}>
         <View >
           <Text style={styles.buttonText}>Guardar</Text>
@@ -74,17 +82,21 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 16,
+    justifyContent: 'center'
   },
   codeContainer: {
     alignItems: 'center',
+    marginBottom: 50,
   },
   title: {
-    fontSize: 22,
+    fontSize: 26,
+  },  
+  subTitle: {
+    fontSize: 20,
   },
   code: {
-    fontSize: 20,
+    fontSize: 26,
     marginVertical: 10,
-    marginBottom: 30,
     fontWeight: 'bold',
   },
   input: {
@@ -92,7 +104,12 @@ const styles = StyleSheet.create({
     borderColor: '#ccc',
     borderWidth: 1,
     marginVertical: 10,
+    fontSize: 18,
     paddingHorizontal: 10,
+    marginBottom: 25,
+  },
+  inputFocused: {
+    borderColor: '#53bce9'
   },
   button: {
     alignItems: 'center',

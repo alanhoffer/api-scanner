@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, Button, ActivityIndicator, Alert } from 'react-native';
 import { Camera, CameraView } from 'expo-camera'; // Asegúrate de usar la última versión
 import { useNavigation } from 'expo-router';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const ScannerScreen: React.FC = () => {
+const CameraScreen: React.FC = () => {
   const navigation: any = useNavigation();
 
   const [hasPermission, setHasPermission] = useState<boolean | null>(null);
@@ -11,14 +12,21 @@ const ScannerScreen: React.FC = () => {
   const [data, setData] = useState<string>('');
 
   useEffect(() => {
-    const getPermissions = async () => {
-      const { status } = await Camera.requestCameraPermissionsAsync();
-      setHasPermission(status === 'granted');
+    const checkPermissions = async () => {
+      const permissionStatus = await AsyncStorage.getItem('cameraPermission');
+      if (permissionStatus !== 'granted') {
+        const { status } = await Camera.requestCameraPermissionsAsync();
+        setHasPermission(status === 'granted');
+        if (status === 'granted') {
+          await AsyncStorage.setItem('cameraPermission', 'granted');
+        }
+      } else {
+        setHasPermission(true);
+      }
     };
 
-    getPermissions();
-  }, [scanned]);
-
+    checkPermissions();
+  }, []);
 
   const handleBarCodeScanned = ({ type, data }: { type: string; data: string }) => {
     // Función para formatear el código de barras
@@ -32,12 +40,12 @@ const ScannerScreen: React.FC = () => {
       }
   
       // Si la longitud sigue siendo mayor a 12, eliminar el último dígito
-      if (cleanedBarcode.length > 12) {
+      if (cleanedBarcode.length >= 12) {
         cleanedBarcode = cleanedBarcode.slice(0, -1);
       }
   
       // Validar longitud del código (debería ser exactamente 12 para el formato XX-XXXXXXXX-X)
-      if (cleanedBarcode.length !== 12) {
+      if (cleanedBarcode.length !>= 12) {
         Alert.alert('El codigo puede estar mal')
       }
   
@@ -127,5 +135,5 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ScannerScreen;
+export default CameraScreen;
 

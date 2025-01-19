@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
 import { View, Image, StyleSheet } from 'react-native';
 import { useNavigation } from 'expo-router';
+import * as SplashScreen from 'expo-splash-screen'; // Importar SplashScreen de Expo
+
 
 
 export default function index() {
@@ -8,15 +10,21 @@ export default function index() {
 
 
   useEffect(() => {
-    navigation.setOptions({
-      headerShown: false,
-    });
-    // Simula un tiempo de carga para la pantalla de splash
-    const timeout = setTimeout(() => {
-      navigation.navigate('screens/InstructionsScreen'); // Reemplaza 'Instructions' con la pantalla que desees mostrar después de la splash
-    }, 2000); // Duración de la pantalla de splash en milisegundos (aquí 2 segundos)
-
-    return () => clearTimeout(timeout);
+    const prepare = async () => {
+      await SplashScreen.preventAutoHideAsync(); // Previene que el splash se oculte automáticamente
+      navigation.setOptions({
+        headerShown: false,
+      });
+  
+      const timeout = setTimeout(() => {
+        navigation.replace('screens/InstructionsScreen');
+        SplashScreen.hideAsync(); // Oculta el splash una vez que navegas a la siguiente pantalla
+      }, 2000);
+  
+      return () => clearTimeout(timeout);
+    };
+  
+    prepare();
   }, []);
 
   return (

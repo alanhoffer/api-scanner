@@ -20,8 +20,8 @@ export default function RootLayout() {
   return (
     <Stack>
       <Stack.Screen name="screens/InstructionsScreen" options={{ headerShown: false }} />
-      <Stack.Screen name="screens/ListScreen" options={{ title: 'Lista de Codigos' }} />
-      <Stack.Screen name="screens/ScannerScreen" options={{ title: 'Scaneando codigo' }} />
+      <Stack.Screen name="screens/ListScreen" options={{ title: 'Lista de Tambores' }} />
+      <Stack.Screen name="screens/CameraScreen" options={{ title: 'Scaneando codigo' }} />
       <Stack.Screen name="screens/FormScreen" options={{ title: 'Completa los datos' }} />
     </Stack>
 );
