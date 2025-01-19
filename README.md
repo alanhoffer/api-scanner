@@ -1,11 +1,11 @@
 
 # ApiScanner
 
-ApiScanner es una aplicación móvil desarrollada con Expo y React Native que permite escanear códigos de barras de tambores de miel, registrar información como código, tara y peso, y exportar la lista de tambores escaneados.
+ApiScanner es una aplicación móvil desarrollada con Expo y React Native que permite escanear códigos de barras de tambores, registrar información como código, tara y peso, y exportar la lista de tambores escaneados.
 
 ## Características
 
-- **Escaneo de códigos de barras**: Utiliza la cámara del dispositivo para escanear códigos de barras de los tambores de miel.
+- **Escaneo de códigos de barras**: Utiliza la cámara del dispositivo para escanear códigos de barras de los tambores.
 - **Registro de información**: Guarda la información de cada tambor, incluyendo código, tara y peso.
 - **Detección de duplicados**: Identifica y resalta los códigos de tambor duplicados.
 - **Exportación de datos**: Exporta la lista de tambores en formato Excel o texto plano.
@@ -16,7 +16,7 @@ ApiScanner es una aplicación móvil desarrollada con Expo y React Native que pe
 1. **Clona el repositorio:**
 
    ```bash
-   git clone https://github.com/tu-usuario/apiscanner.git
+   git clone https://github.com/alanhoffer/api-scanner.git
    ```
 
 2. **Instala las dependencias:**
@@ -81,6 +81,4 @@ Las contribuciones son bienvenidas. Si deseas mejorar este proyecto, sigue los p
 4. Sube los cambios a tu repositorio (`git push origin feature-nueva-funcionalidad`).
 5. Crea un Pull Request.
 
-## Licencia
 
-Este proyecto está licenciado bajo la MIT License. Consulta el archivo [LICENSE](LICENSE) para más detalles.
